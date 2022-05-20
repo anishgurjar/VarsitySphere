@@ -4,6 +4,7 @@ import { Camera, CameraType } from 'expo-camera';
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(null);
+  const [camera, setCamera] = useState(null);
   const [type, setType] = useState(CameraType.back);
 
   useEffect(() => {
@@ -12,6 +13,13 @@ export default function App() {
       setHasPermission(status === 'granted');
     })();
   }, []);
+
+  const takePicture = async () => {
+    if(camera){
+        const data = await camera.takePictureAsync(null);
+        console.log(data.uri)
+    }
+  }
 
   if (hasPermission === null) {
     return <View />;
@@ -24,6 +32,7 @@ export default function App() {
 
     <View style={styles.cameraContainer}>
       <Camera
+      ref={ ref => setCamera(ref)}
        style={styles.fixedRatio} 
        type={type}
        ratio={'1:1'} />
@@ -35,6 +44,9 @@ export default function App() {
         setType(type === CameraType.back ? CameraType.front : CameraType.back);
         }}>
     </Button>
+
+    <Button title="Take Picture" onPress={() => takePicture()}/>
+
 
   </View>
   
