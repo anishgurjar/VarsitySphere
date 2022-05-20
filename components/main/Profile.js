@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 import {connect} from 'react-redux'
 
 
-export default function Profile(){
+function Profile(){
     return (
         <View>
             <Text>Profile</Text>
@@ -12,3 +12,9 @@ export default function Profile(){
     )
 }
 
+const mapStateToProps = (store) => ({
+    currentUser: store.userState.currentUser,
+    posts: store.userState.posts
+})
+
+export default connect(mapStateToProps, null)(Profile)
