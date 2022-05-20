@@ -1,6 +1,9 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
+import {connect} from 'react-redux'
+
+
 export default function Profile(){
     return (
         <View>
@@ -8,3 +11,4 @@ export default function Profile(){
         </View>
     )
 }
+
